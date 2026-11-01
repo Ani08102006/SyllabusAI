@@ -1,0 +1,6 @@
+{
+  "name": "SyllabusAI - Smart Study Organizer",
+  "description": "AI-powered college study assistant that organizes syllabus, generates notes, prepares for exams, and creates realistic handwritten assignments.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

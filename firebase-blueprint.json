@@ -1,0 +1,323 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A student or admin using the app",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "STU-XXXXXX format"
+        },
+        "firebaseUid": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastLogin": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "loginCount": {
+          "type": "number"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "Student",
+            "Teacher",
+            "Admin"
+          ]
+        }
+      },
+      "required": [
+        "userId",
+        "firebaseUid",
+        "fullName",
+        "email",
+        "createdAt",
+        "lastLogin",
+        "loginCount",
+        "provider",
+        "role"
+      ]
+    },
+    "Semester": {
+      "title": "Semester",
+      "description": "A semester or term",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "name",
+        "createdAt"
+      ]
+    },
+    "Subject": {
+      "title": "Subject",
+      "description": "A subject within a semester",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "semesterId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "marksDistribution": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "semesterId",
+        "name",
+        "createdAt"
+      ]
+    },
+    "Unit": {
+      "title": "Unit",
+      "description": "A unit within a subject",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "subjectId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "subjectId",
+        "name",
+        "topics",
+        "createdAt"
+      ]
+    },
+    "Note": {
+      "title": "Note",
+      "description": "Generated notes for a topic",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "unitId": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "unitId",
+        "topic",
+        "content",
+        "createdAt"
+      ]
+    },
+    "StudyTask": {
+      "title": "StudyTask",
+      "description": "A daily study goal or checklist item",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "subjectId": {
+          "type": "string"
+        },
+        "subjectName": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "completed": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "date",
+        "completed",
+        "createdAt"
+      ]
+    },
+    "SearchLog": {
+      "title": "SearchLog",
+      "description": "Logs of student searches and interactions",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "firebaseUid": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "page": {
+          "type": "string"
+        },
+        "searchQuery": {
+          "type": "string"
+        },
+        "detectedSubject": {
+          "type": "string"
+        },
+        "aiResponse": {
+          "type": "string"
+        },
+        "browser": {
+          "type": "string"
+        },
+        "operatingSystem": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "responseTime": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "userId",
+        "firebaseUid",
+        "fullName",
+        "email",
+        "timestamp",
+        "page",
+        "searchQuery",
+        "detectedSubject",
+        "aiResponse",
+        "browser",
+        "operatingSystem",
+        "device",
+        "language",
+        "responseTime"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "User profiles"
+    },
+    "/semesters/{semesterId}": {
+      "schema": {
+        "$ref": "#/entities/Semester"
+      },
+      "description": "Semesters created by users"
+    },
+    "/subjects/{subjectId}": {
+      "schema": {
+        "$ref": "#/entities/Subject"
+      },
+      "description": "Subjects within semesters"
+    },
+    "/units/{unitId}": {
+      "schema": {
+        "$ref": "#/entities/Unit"
+      },
+      "description": "Units within subjects"
+    },
+    "/notes/{noteId}": {
+      "schema": {
+        "$ref": "#/entities/Note"
+      },
+      "description": "Notes for topics"
+    },
+    "/study_tasks/{taskId}": {
+      "schema": {
+        "$ref": "#/entities/StudyTask"
+      },
+      "description": "Daily study goals and checklist items"
+    },
+    "/users/{docId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "User profiles"
+    },
+    "/search_logs/{logId}": {
+      "schema": {
+        "$ref": "#/entities/SearchLog"
+      },
+      "description": "Logs of student searches and interactions"
+    }
+  }
+}
